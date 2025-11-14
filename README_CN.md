@@ -60,7 +60,7 @@ YubiKey 上的加密密钥是[不可导出的](https://web.archive.org/web/20201
 - [替代方案](#alternative-solutions)
 - [其他资源](#additional-resources)
 
-# Purchase YubiKey
+# 购买 YubiKey
 
 [所有 YubiKey](https://www.yubico.com/store/compare/) *除了* 仅支持 FIDO 的 Security Key 系列和 Bio 系列 YubiKey 都与本指南兼容。
 
@@ -68,7 +68,7 @@ YubiKey 上的加密密钥是[不可导出的](https://web.archive.org/web/20201
 
 还建议准备几个便携式存储设备（如 microSD 卡）用于存储加密备份。
 
-# Prepare environment
+# 准备环境
 
 建议使用专用、安全的操作环境来生成加密密钥。
 
@@ -161,7 +161,7 @@ $ doas dd if=debian-live-*-amd64-xfce.iso of=/dev/rsd2c bs=4m
 
 关闭电源，移除内部硬盘驱动器和所有不必要的设备，例如无线网卡。
 
-# Install software
+# 安装软件
 
 加载操作系统并配置网络。与网络相关的可选加固步骤可以在[下面](#network-considerations)找到。
 
@@ -274,7 +274,7 @@ sudo dnf install \
     yubikey-personalization-gui yubikey-manager
 ```
 
-# Prepare GnuPG
+# 准备 GnuPG
 
 创建一个临时目录，该目录将在[重启](https://en.wikipedia.org/wiki/Tmpfs)时被清除，并将其设置为 GnuPG 目录：
 
@@ -282,7 +282,7 @@ sudo dnf install \
 export GNUPGHOME=$(mktemp -d -t $(date +%Y.%m.%d)-XXXX)
 ```
 
-## Configuration
+## 配置
 
 创建或导入[加固配置](https://github.com/drduh/YubiKey-Guide/blob/master/config/gpg.conf)：
 
@@ -322,7 +322,7 @@ throw-keyids
 > [!IMPORTANT]
 > 在剩余的设置过程中，应禁用网络。
 
-## Identity
+## 身份
 
 使用 GnuPG 创建身份时，默认选项会要求提供"真实姓名"、"电子邮件地址"和可选的"注释"。
 
@@ -338,7 +338,7 @@ export IDENTITY="YubiKey User <yubikey@example.domain>"
 export IDENTITY="My Cool YubiKey - 2025"
 ```
 
-## Key
+## 密钥
 
 设置算法和密钥大小 - 推荐使用 RSA/4096：
 
@@ -346,7 +346,7 @@ export IDENTITY="My Cool YubiKey - 2025"
 export KEY_TYPE=rsa4096
 ```
 
-## Expiration
+## 过期时间
 
 确定所需的子密钥有效期。
 
@@ -370,7 +370,7 @@ export EXPIRATION=2027-07-01
 export EXPIRATION=2y
 ```
 
-## Passphrase
+## 密码短语
 
 为认证密钥生成密码短语。此凭证将用于管理身份子密钥。
 
@@ -407,7 +407,7 @@ lp -d Printer-Name passphrase.txt
 
 [Diceware](https://secure.research.vt.edu/diceware) 是创建易记密码短语的另一种流行方法。
 
-# Create Certify key
+# 创建认证密钥
 
 要生成的主密钥是认证密钥，它负责颁发用于加密、签名和身份验证操作的子密钥。
 
@@ -479,7 +479,7 @@ EOF
 ```
 </details>
 
-# Create Subkeys
+# 创建子密钥
 
 使用先前配置的密钥类型、密码短语和过期时间生成签名和加密子密钥：
 
@@ -504,7 +504,7 @@ echo "$CERTIFY_PASS" | \
         --quick-add-key "$KEYFP" "$KEY_TYPE" auth "$EXPIRATION"
 ```
 
-# Verify keys
+# 验证密钥
 
 列出可用的私钥：
 
@@ -523,7 +523,7 @@ ssb   rsa4096/0x30CBE8C4B085B9F7 2025-07-01 [E] [expires: 2027-07-01]
 ssb   rsa4096/0xAD9E24E1B8CB9600 2025-07-01 [A] [expires: 2027-07-01]
 ```
 
-# Backup keys
+# 备份密钥
 
 保存认证密钥、子密钥和公钥的副本：
 
