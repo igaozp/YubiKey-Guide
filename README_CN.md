@@ -2,30 +2,30 @@
 
 YubiKey 上的加密密钥是[不可导出的](https://web.archive.org/web/20201125172759/https://support.yubico.com/hc/en-us/articles/360016614880-Can-I-Duplicate-or-Back-Up-a-YubiKey-)，这与基于文件系统的凭证不同，同时在日常使用中保持便利性。YubiKey 可以配置为需要物理触摸才能进行加密操作，从而降低未经授权访问的风险。
 
-- [购买 YubiKey](#purchase-yubikey)
-- [准备环境](#prepare-environment)
-- [安装软件](#install-software)
-- [准备 GnuPG](#prepare-gnupg)
+- [购买 YubiKey](#购买-yubikey)
+- [准备环境](#准备环境)
+- [安装软件](#安装软件)
+- [准备 GnuPG](#准备-gnupg)
    * [配置](#configuration)
    * [身份](#identity)
    * [密钥](#key)
    * [过期时间](#expiration)
    * [密码短语](#passphrase)
-- [创建认证密钥](#create-certify-key)
-- [创建子密钥](#create-subkeys)
-- [验证密钥](#verify-keys)
-- [备份密钥](#backup-keys)
+- [创建认证密钥](#创建认证密钥)
+- [创建子密钥](#创建子密钥)
+- [验证密钥](#验证密钥)
+- [备份密钥](#备份密钥)
 - [导出公钥](#export-public-key)
 - [配置 YubiKey](#configure-yubikey)
    * [更改 PIN](#change-pin)
    * [设置属性](#set-attributes)
-- [传输子密钥](#transfer-subkeys)
+- [传输子密钥](#传输子密钥)
    * [签名密钥](#signature-key)
    * [加密密钥](#encryption-key)
    * [身份验证密钥](#authentication-key)
-- [验证传输](#verify-transfer)
-- [完成设置](#finish-setup)
-- [使用 YubiKey](#using-yubikey)
+- [验证传输](#验证传输)
+- [完成设置](#完成设置)
+- [使用 YubiKey](#使用-yubikey)
    * [加密](#encryption)
    * [签名](#signature)
    * [配置触摸](#configure-touch)
@@ -47,20 +47,20 @@ YubiKey 上的加密密钥是[不可导出的](https://web.archive.org/web/20201
       + [Mailvelope](#mailvelope)
       + [Mutt](#mutt)
    * [密钥服务器](#keyserver)
-- [更新密钥](#updating-keys)
+- [更新密钥](#更新密钥)
    * [续期子密钥](#renew-subkeys)
    * [轮换子密钥](#rotate-subkeys)
-- [重置 YubiKey](#reset-yubikey)
-- [可选加固](#optional-hardening)
+- [重置 YubiKey](#重置-yubikey)
+- [可选加固](#可选加固)
    * [改善熵](#improving-entropy)
    * [启用 KDF](#enable-kdf)
    * [网络注意事项](#network-considerations)
-- [注意事项](#notes)
-- [故障排除](#troubleshooting)
-- [替代方案](#alternative-solutions)
-- [其他资源](#additional-resources)
+- [注意事项](#注意事项)
+- [故障排除](#故障排除)
+- [替代方案](#替代解决方案)
+- [其他资源](#其他资源)
 
-# Purchase YubiKey
+# 购买 YubiKey
 
 [所有 YubiKey](https://www.yubico.com/store/compare/) *除了* 仅支持 FIDO 的 Security Key 系列和 Bio 系列 YubiKey 都与本指南兼容。
 
@@ -68,7 +68,7 @@ YubiKey 上的加密密钥是[不可导出的](https://web.archive.org/web/20201
 
 还建议准备几个便携式存储设备（如 microSD 卡）用于存储加密备份。
 
-# Prepare environment
+# 准备环境
 
 建议使用专用、安全的操作环境来生成加密密钥。
 
@@ -161,7 +161,7 @@ $ doas dd if=debian-live-*-amd64-xfce.iso of=/dev/rsd2c bs=4m
 
 关闭电源，移除内部硬盘驱动器和所有不必要的设备，例如无线网卡。
 
-# Install software
+# 安装软件
 
 加载操作系统并配置网络。与网络相关的可选加固步骤可以在[下面](#network-considerations)找到。
 
@@ -274,7 +274,7 @@ sudo dnf install \
     yubikey-personalization-gui yubikey-manager
 ```
 
-# Prepare GnuPG
+# 准备 GnuPG
 
 创建一个临时目录，该目录将在[重启](https://en.wikipedia.org/wiki/Tmpfs)时被清除，并将其设置为 GnuPG 目录：
 
@@ -407,7 +407,7 @@ lp -d Printer-Name passphrase.txt
 
 [Diceware](https://secure.research.vt.edu/diceware) 是创建易记密码短语的另一种流行方法。
 
-# Create Certify key
+# 创建认证密钥
 
 要生成的主密钥是认证密钥，它负责颁发用于加密、签名和身份验证操作的子密钥。
 
@@ -479,7 +479,7 @@ EOF
 ```
 </details>
 
-# Create Subkeys
+# 创建子密钥
 
 使用先前配置的密钥类型、密码短语和过期时间生成签名和加密子密钥：
 
@@ -504,7 +504,7 @@ echo "$CERTIFY_PASS" | \
         --quick-add-key "$KEYFP" "$KEY_TYPE" auth "$EXPIRATION"
 ```
 
-# Verify keys
+# 验证密钥
 
 列出可用的私钥：
 
@@ -523,7 +523,7 @@ ssb   rsa4096/0x30CBE8C4B085B9F7 2025-07-01 [E] [expires: 2027-07-01]
 ssb   rsa4096/0xAD9E24E1B8CB9600 2025-07-01 [A] [expires: 2027-07-01]
 ```
 
-# Backup keys
+# 备份密钥
 
 保存认证密钥、子密钥和公钥的副本：
 
