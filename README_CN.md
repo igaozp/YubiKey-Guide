@@ -6,55 +6,55 @@ YubiKey 上的加密密钥是[不可导出的](https://web.archive.org/web/20201
 - [准备环境](#准备环境)
 - [安装软件](#安装软件)
 - [准备 GnuPG](#准备-gnupg)
-   * [配置](#configuration)
-   * [身份](#identity)
-   * [密钥](#key)
-   * [过期时间](#expiration)
-   * [密码短语](#passphrase)
+   * [配置](#配置)
+   * [身份](#身份)
+   * [密钥](#密钥)
+   * [过期时间](#过期时间)
+   * [密码短语](#密码短语)
 - [创建认证密钥](#创建认证密钥)
 - [创建子密钥](#创建子密钥)
 - [验证密钥](#验证密钥)
 - [备份密钥](#备份密钥)
-- [导出公钥](#export-public-key)
-- [配置 YubiKey](#configure-yubikey)
-   * [更改 PIN](#change-pin)
-   * [设置属性](#set-attributes)
+- [导出公钥](#导出公钥)
+- [配置 YubiKey](#配置-yubikey)
+   * [更改 PIN](#更改-pin)
+   * [设置属性](#设置属性)
 - [传输子密钥](#传输子密钥)
-   * [签名密钥](#signature-key)
-   * [加密密钥](#encryption-key)
-   * [身份验证密钥](#authentication-key)
+   * [签名密钥](#签名密钥)
+   * [加密密钥](#加密密钥)
+   * [身份验证密钥](#身份验证密钥)
 - [验证传输](#验证传输)
 - [完成设置](#完成设置)
 - [使用 YubiKey](#使用-yubikey)
-   * [加密](#encryption)
-   * [签名](#signature)
-   * [配置触摸](#configure-touch)
+   * [加密](#加密)
+   * [签名](#签名)
+   * [配置触摸](#配置触摸)
    * [SSH](#ssh)
-      + [替换代理](#replace-agents)
-      + [复制公钥](#copy-public-key)
-      + [导入 SSH 密钥](#import-ssh-keys)
-      + [SSH 代理转发](#ssh-agent-forwarding)
-         - [使用 ssh-agent](#use-ssh-agent)
-         - [使用 S.gpg-agent.ssh](#use-sgpg-agentssh)
-         - [链式转发](#chained-forwarding)
+      + [替换代理](#替换代理)
+      + [复制公钥](#复制公钥)
+      + [导入 SSH 密钥](#导入-ssh-密钥)
+      + [SSH 代理转发](#ssh-代理转发)
+         - [使用 ssh-agent](#使用-ssh-agent)
+         - [使用 S.gpg-agent.ssh](#使用-sgpg-agentssh)
+         - [链式转发](#链式转发)
    * [GitHub](#github)
-   * [GnuPG 代理转发](#gnupg-agent-forwarding)
-      + [旧版发行版](#legacy-distributions)
-      + [链式 GnuPG 代理转发](#chained-gnupg-agent-forwarding)
-   * [使用多个 YubiKey](#using-multiple-yubikeys)
-   * [电子邮件](#email)
+   * [GnuPG 代理转发](#gnupg-代理转发)
+      + [旧版发行版](#旧版发行版)
+      + [链式 GnuPG 代理转发](#链式-gnupg-代理转发)
+   * [使用多个 YubiKey](#使用多个-yubikey)
+   * [电子邮件](#电子邮件)
       + [Thunderbird](#thunderbird)
       + [Mailvelope](#mailvelope)
       + [Mutt](#mutt)
-   * [密钥服务器](#keyserver)
+   * [密钥服务器](#密钥服务器)
 - [更新密钥](#更新密钥)
-   * [续期子密钥](#renew-subkeys)
-   * [轮换子密钥](#rotate-subkeys)
+   * [续期子密钥](#续期子密钥)
+   * [轮换子密钥](#轮换子密钥)
 - [重置 YubiKey](#重置-yubikey)
 - [可选加固](#可选加固)
-   * [改善熵](#improving-entropy)
-   * [启用 KDF](#enable-kdf)
-   * [网络注意事项](#network-considerations)
+   * [改善熵](#改善熵)
+   * [启用 KDF](#启用-kdf)
+   * [网络注意事项](#网络注意事项)
 - [注意事项](#注意事项)
 - [故障排除](#故障排除)
 - [替代方案](#替代解决方案)
@@ -282,7 +282,7 @@ sudo dnf install \
 export GNUPGHOME=$(mktemp -d -t $(date +%Y.%m.%d)-XXXX)
 ```
 
-## Configuration
+## 配置
 
 创建或导入[加固配置](https://github.com/drduh/YubiKey-Guide/blob/master/config/gpg.conf)：
 
@@ -322,7 +322,7 @@ throw-keyids
 > [!IMPORTANT]
 > 在剩余的设置过程中，应禁用网络。
 
-## Identity
+## 身份
 
 使用 GnuPG 创建身份时，默认选项会要求提供"真实姓名"、"电子邮件地址"和可选的"注释"。
 
@@ -338,7 +338,7 @@ export IDENTITY="YubiKey User <yubikey@example.domain>"
 export IDENTITY="My Cool YubiKey - 2025"
 ```
 
-## Key
+## 密钥
 
 设置算法和密钥大小 - 推荐使用 RSA/4096：
 
@@ -346,7 +346,7 @@ export IDENTITY="My Cool YubiKey - 2025"
 export KEY_TYPE=rsa4096
 ```
 
-## Expiration
+## 过期时间
 
 确定所需的子密钥有效期。
 
@@ -370,7 +370,7 @@ export EXPIRATION=2027-07-01
 export EXPIRATION=2y
 ```
 
-## Passphrase
+## 密码短语
 
 为认证密钥生成密码短语。此凭证将用于管理身份子密钥。
 
