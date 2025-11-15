@@ -57,7 +57,7 @@ YubiKey 上的加密密钥是[不可导出的](https://web.archive.org/web/20201
    * [网络注意事项](#网络注意事项)
 - [注意事项](#注意事项)
 - [故障排除](#故障排除)
-- [替代方案](#替代解决方案)
+- [替代方案](#替代方案)
 - [其他资源](#其他资源)
 
 # 购买 YubiKey
@@ -1979,7 +1979,7 @@ echo $KEYID $KEYFP
 export CERTIFY_PASS=ABCD-0123-IJKL-4567-QRST-UVWX
 ```
 
-## 更新子密钥
+## 续期子密钥
 
 设置更新的过期日期:
 
@@ -2312,7 +2312,7 @@ EOF
 
 - 参考 Yubico 文章[排除 GPG 问题](https://support.yubico.com/hc/en-us/articles/360013714479-Troubleshooting-Issues-with-GPG)获取更多指导。
 
-# 替代解决方案
+# 替代方案
 
 * [`vorburger/ed25519-sk.md`](https://github.com/vorburger/vorburger.ch-Notes/blob/develop/security/ed25519-sk.md) - 使用 YubiKey 进行 SSH 而不使用 GnuPG
 * [`smlx/piv-agent`](https://github.com/smlx/piv-agent) - SSH 和 GnuPG 代理，可与 PIV 设备一起使用
