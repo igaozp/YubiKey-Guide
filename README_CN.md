@@ -1,5 +1,7 @@
 [English](README.md) | [简体中文](README_CN.md)
 
+![YubiKey 指南 — 保持认证主密钥离线](media/yubikey-guide-cover.png)
+
 本指南介绍如何将凭据存储在 [YubiKey](https://www.yubico.com/products/identifying-your-yubikey/) 中。私钥一旦写入设备便无法再复制出来；另行离线保管的“认证（Certify）”主密钥仅用于更换或续期这些私钥。
 
 - [购买 YubiKey](#购买-yubikey)

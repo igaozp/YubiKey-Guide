@@ -1,5 +1,7 @@
 [English](README.md) | [简体中文](README_CN.md)
 
+![YubiKey Guide — Keep the Root Offline](media/yubikey-guide-cover.png)
+
 This guide demonstrates how to store credentials on a [YubiKey](https://www.yubico.com/products/identifying-your-yubikey/). The private keys cannot be copied back out of the device; a separate offline "Certify" key is retained only to replace or renew them.
 
 - [Purchase YubiKey](#purchase-yubikey)
